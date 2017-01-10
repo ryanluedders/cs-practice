@@ -19,6 +19,25 @@ public class CircularQueueTest {
     }
     
     @Test
+    public void testCircularQueue_dequeue() {
+    	int size = 10;
+    	CircularQueue<Integer> q = new CircularQueue<>(size);
+    	
+    	q.enqueue(1);
+    	q.enqueue(2);
+    	q.enqueue(3);
+    	
+    	assertEquals("[1,2,3]", q.toString());
+    	
+    	assertEquals(1, q.dequeue().intValue());
+    	assertEquals(2, q.dequeue().intValue());
+    	assertEquals(3, q.dequeue().intValue());
+    	assertEquals(null, q.dequeue());
+    	
+    	assertEquals("[]", q.toString());
+    }
+    
+    @Test
     public void testCircularQueue_empty() {
     	int size = 10;
     	CircularQueue<Integer> q = new CircularQueue<>(size);

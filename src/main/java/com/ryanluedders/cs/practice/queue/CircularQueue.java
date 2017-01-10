@@ -12,24 +12,38 @@ public class CircularQueue<T> {
     	values = (T[]) new Object[size];
     }
     
+	// front == null && rear == null : represents EMPTY case
+	// front == rear (and not null) : represents FULL case
+    
     public void enqueue(T t) {
+    	// check for empty case, set up indices in preparation for add
     	if (front == null && rear == null) {
     		front = 0;
     		rear = 0;
     	} else if (front == rear) {
     		throw new IllegalArgumentException("queue overflow");
     	}
+    	
     	values[rear] = t;
     	rear = (rear + 1) % values.length;
     }
     
     public T dequeue() {
+    	if (front == null && rear == null) {
+    		return null;
+    	}
+    	
     	T result = values[front];
     	front = (front + 1) % values.length;
+    	
+    	// on dequeue, check if front has caught back up with
+    	// rear. This indicates an empty case and indices should
+    	// indicate such
     	if (front == rear) {
     		front = null;
     		rear = null;
     	}
+    	
     	return result;
     }
     
