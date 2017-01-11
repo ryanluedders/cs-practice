@@ -2,11 +2,13 @@ package com.ryanluedders.cs.practice.queue;
 
 public class CircularQueue<T> {
 	
-	T[] values;
+	private T[] values;
 
-	Integer front = null;
+	private Integer front = 0;
 	
-	Integer rear = null;
+	private Integer rear = 0;
+	
+	private boolean isEmpty = true;
     
     public CircularQueue(int size) {
     	values = (T[]) new Object[size];
@@ -17,9 +19,8 @@ public class CircularQueue<T> {
     
     public void enqueue(T t) {
     	// check for empty case, set up indices in preparation for add
-    	if (front == null && rear == null) {
-    		front = 0;
-    		rear = 0;
+    	if (isEmpty) {
+    		isEmpty = false;
     	} else if (front == rear) {
     		throw new IllegalArgumentException("queue overflow");
     	}
@@ -29,7 +30,7 @@ public class CircularQueue<T> {
     }
     
     public T dequeue() {
-    	if (front == null && rear == null) {
+    	if (isEmpty) {
     		return null;
     	}
     	
@@ -40,15 +41,14 @@ public class CircularQueue<T> {
     	// rear. This indicates an empty case and indices should
     	// indicate such
     	if (front == rear) {
-    		front = null;
-    		rear = null;
+    		isEmpty = true;
     	}
     	
     	return result;
     }
     
     public String toString() {
-    	if (front == null && rear == null) {
+    	if (isEmpty) {
     		return "[]";
     	}
     	

@@ -30,8 +30,16 @@ public class CircularQueueTest {
     	assertEquals("[1,2,3]", q.toString());
     	
     	assertEquals(1, q.dequeue().intValue());
+    	
+    	assertEquals("[2,3]", q.toString());
+    	
+    	q.enqueue(4);
+    	
+    	assertEquals("[2,3,4]", q.toString());
+    	
     	assertEquals(2, q.dequeue().intValue());
     	assertEquals(3, q.dequeue().intValue());
+    	assertEquals(4, q.dequeue().intValue());
     	assertEquals(null, q.dequeue());
     	
     	assertEquals("[]", q.toString());
