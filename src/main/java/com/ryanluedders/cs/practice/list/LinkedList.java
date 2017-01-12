@@ -67,5 +67,43 @@ public class LinkedList<T> {
         result += "]";
         return result;
     }
+    
+    public int size() {
+    	Node<T> n = start;
+    	int result = 0;
+    	while (n != null) {
+    		n = n.next;
+    		result += 1;
+    	}
+    	return result;
+    }
+    
+    public void replace(int idx, T t) {
+    	if (idx == 0) {
+    		Node<T> n = new Node<T>();
+    		n.setNext(start.next);
+    		n.setValue(t);
+    		start = n;
+    		return;
+    	}
+    	
+    	Node<T> n = start;
+    	int i = 0;
+    	while (i < (idx - 1)) {
+    		i += 1;
+    		n = n.next;
+    	}
+    	
+    	Node<T> replacement = new Node<T>();
+    	replacement.setValue(t);
+    	
+    	if (n.next == null) {
+    		replacement.setNext(null);
+    	} else {
+    		replacement.setNext(n.next.next);
+    	}
+    	
+    	n.next = replacement;
+    }
 
 }

@@ -12,6 +12,7 @@ public class LinkedListTest {
         l.addToEnd(1);
         l.addToEnd(3);
         l.addToEnd(5);
+        assertEquals(3, l.size());
         assertEquals("[1,3,5]", l.toString());
     }
     
@@ -19,12 +20,14 @@ public class LinkedListTest {
     public void testLinkedList_single_item() {
         LinkedList<Integer> l = new LinkedList<>();
         l.addToEnd(5);
+        assertEquals(1, l.size());
         assertEquals("[5]", l.toString());
     }
     
     @Test
     public void testLinkedList_empty() {
         LinkedList<Integer> l = new LinkedList<>();
+        assertEquals(0, l.size());
         assertEquals("[]", l.toString());
     }
     
@@ -34,6 +37,7 @@ public class LinkedListTest {
         l.addToEnd(1);
         l.addToEnd(null);
         l.addToEnd(5);
+        assertEquals(3, l.size());
         assertEquals("[1,null,5]", l.toString());
     }
     
@@ -43,6 +47,7 @@ public class LinkedListTest {
         l.addToEnd(1);
         l.addToEnd(3);
         l.addToEnd(5);
+        assertEquals(3, l.size());
         assertEquals(5, l.get(2).intValue());
     }
     
@@ -52,6 +57,7 @@ public class LinkedListTest {
         l.addToEnd(1);
         l.addToEnd(3);
         l.addToEnd(5);
+        assertEquals(3, l.size());
         assertEquals(5, l.get(3).intValue());
     }
 
