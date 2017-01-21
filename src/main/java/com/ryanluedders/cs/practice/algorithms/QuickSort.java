@@ -2,7 +2,11 @@ package com.ryanluedders.cs.practice.algorithms;
 
 public class QuickSort<T> {
 	
-	public static void sort(Integer[] in, int l, int r) {
+	public static <T extends Comparable<T>> void sort(T[] in, int l, int r) {
+		if (r <= l) {
+			return;
+		}
+		
 		int pivotIdx = partition(in, l, r);
 		if (l < pivotIdx - 1) {
 			sort(in, l, pivotIdx - 1);
@@ -12,23 +16,23 @@ public class QuickSort<T> {
 		}
 	}
 	
-	public static int partition(Integer[] in, int l, int r) {
-		Integer pivotValue = in[l + ((r - l) / 2)];
+	public static <T extends Comparable<T>>int partition(T[] in, int l, int r) {
+		T pivotValue = in[l + ((r - l) / 2)];
 		
-		System.out.println(String.format("l=%d, r=%d, pivot=%d",
-				l, r, pivotValue));
+		System.out.println(String.format("l=%d, r=%d, pivot=%s",
+				l, r, pivotValue.toString()));
 		
 		int i = l;
 		int j = r;
 		while (i <= j) {
-			while (in[i] < pivotValue) {
+			while (in[i].compareTo(pivotValue) < 0) {
 				i++;
 			}
-			while (in[j] > pivotValue) {
+			while (in[j].compareTo(pivotValue) > 0) {
 				j--;
 			}
 			if (i <= j) {
-				Integer temp = in[i];
+				T temp = in[i];
 				in[i] = in[j];
 				in[j] = temp;
 				

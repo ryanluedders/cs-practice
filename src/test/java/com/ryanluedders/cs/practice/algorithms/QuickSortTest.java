@@ -54,5 +54,39 @@ public class QuickSortTest {
 		
 		assertEquals("[3, 3, 3, 4, 4, 5, 5, 5]", Arrays.toString(input));
 	}
+	
+	public void testSort_with_null() {
+		Integer[] input = {4, null, 2, null, null};
+		
+		QuickSort.sort(input, 0, input.length - 1);
+		
+		assertEquals("[null, null, null, 1, 4]", Arrays.toString(input));
+	}
+	
+	public void testSort_with_only_null() {
+		Integer[] input = {null, null, null};
+		
+		QuickSort.sort(input, 0, input.length - 1);
+		
+		assertEquals("[null, null, null]", Arrays.toString(input));
+	}
+	
+	@Test
+	public void testSort_empty() {
+		Integer[] input = {};
+		
+		QuickSort.sort(input, 0, input.length - 1);
+		
+		assertEquals("[]", Arrays.toString(input));
+	}
+	
+	@Test
+	public void testSort_characters() {
+		Character[] input = {'B', 'N', 'M', 'Y', 'U', 'I', 'W', 'A'};
+		
+		QuickSort.sort(input, 0, input.length - 1);
+		
+		assertEquals("[A, B, I, M, N, U, W, Y]", Arrays.toString(input));
+	}
 
 }
