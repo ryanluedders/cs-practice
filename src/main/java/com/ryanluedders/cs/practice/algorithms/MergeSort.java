@@ -1,52 +1,64 @@
 package com.ryanluedders.cs.practice.algorithms;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class MergeSort<T> {
+public class MergeSort {
 	
-	public static <T extends Comparable<T>> T[] mergeSort(T[] input) {
-		return null;
-	}
-	
-	public static <T extends Comparable<T>> List<T> sort(List<T> input) {
-		if (input.size() <= 1) {
-			return input;
+	public static <T extends Comparable<T>> void sort(T[] input, int left, int right) {
+		if (left == right) {
+			return;
 		}
 		
-		int mid = (input.size() / 2);
-		int end = (input.size());
+		int mid = left + ((right - left) / 2);
+		
+		System.out.println(String.format("left=%d, mid=%d, right=%d", left, mid, right));
 	
-		List<T> l = sort(input.subList(0, mid));
-		List<T> r = sort(input.subList(mid, end));
+		sort(input, left, mid);
+		sort(input, mid + 1, right);
 		
-		return merge(l, r);
-		
+		merge(input, left, mid, right);		
 	}
 	
-	public static <T extends Comparable<T>> List<T> merge(List<T> i1, List<T> i2) {
-		int idx1 = 0;
-		int idx2 = 0;
+	public static <T extends Comparable<T>> void merge(T[] input, int left, int mid, int right) {
+		int leftIdx = left;
+		int rightIdx = mid + 1;
+		int resultIdx = 0;
 		
-		List<T> result = new ArrayList<>();
+		int size = right - left + 1;
 		
-		while (idx1 != i1.size() || idx2 != i2.size()) {
-			if (idx1 == i1.size()) {
-				result.add(i2.get(idx2));
-				idx2 += 1;
-			} else if (idx2 == i2.size()) {
-				result.add(i1.get(idx1));
-				idx1 += 1;
-			} else if (i1.get(idx1).compareTo(i2.get(idx2)) < 0) {
-				result.add(i1.get(idx1));
-				idx1 += 1;
+		@SuppressWarnings("unchecked")
+		T[] tempArray = (T[]) new Comparable[size];
+		
+		while (leftIdx <= mid || rightIdx <= right) {
+			if (leftIdx > mid) {
+				// if we've looked at all items on the left, use items from the right
+				tempArray[resultIdx] = input[rightIdx];
+				rightIdx++;
+			} else if (rightIdx > right) {
+				// if we've looked at all items on the right, use items from the left
+				tempArray[resultIdx] = input[leftIdx];
+				leftIdx++;
+			} else if (input[leftIdx] == null) {
+				tempArray[resultIdx] = input[leftIdx];
+				leftIdx++;
+			} else if (input[rightIdx] == null) {
+				tempArray[resultIdx] = input[rightIdx];
+				rightIdx++;
+			} else if (input[leftIdx].compareTo(input[rightIdx]) < 0) {
+				tempArray[resultIdx] = input[leftIdx];
+				leftIdx++;
 			} else {
-				result.add(i2.get(idx2));
-				idx2 += 1;
+				tempArray[resultIdx] = input[rightIdx];
+				rightIdx++;
 			}
+			resultIdx++;
 		}
 		
-		return result;
+		copyArray(tempArray, input, left);
+	}
+	
+	private static <T extends Comparable<T>> void copyArray(T[] from, T[] to, int startIdx) {
+		for (int i = 0; i < from.length; i++) {
+			to[startIdx + i] = from[i];
+		}
 	}
 
 }

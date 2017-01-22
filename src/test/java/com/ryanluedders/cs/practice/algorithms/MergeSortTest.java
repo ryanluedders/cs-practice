@@ -2,67 +2,73 @@ package com.ryanluedders.cs.practice.algorithms;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import org.junit.Test;
 
 public class MergeSortTest {
 	
 	@Test
-	public void testMerge() {
-		List<Integer> l = Arrays.asList(1, 4, 9);
-		List<Integer> r = Arrays.asList(2, 5, 8);
-		
-		List<Integer> result = MergeSort.merge(l, r);
-		
-		System.out.println(result.toString());
-	}
-	
-	@Test
 	public void testMergeSort_even_no() {
-		List<Integer> input = Arrays.asList(4, 2, 9, 3, 1, 5, 8, 7);
+		Integer[] in = {4, 2, 9, 3, 1, 5, 8, 7};
 		
-		List<Integer> result = MergeSort.sort(input);
+		MergeSort.sort(in, 0, in.length - 1);
 		
-		assertEquals("[1, 2, 3, 4, 5, 7, 8, 9]", result.toString());
+		assertEquals("[1, 2, 3, 4, 5, 7, 8, 9]", Arrays.toString(in));
 	}
 	
 	@Test
 	public void testMergeSort_odd_no() {
-		List<Integer> input = Arrays.asList(4, 2, 9, 3, 1, 5, 8);
+		Integer[] in = {4, 2, 9, 3, 1, 5, 8};
 		
-		List<Integer> result = MergeSort.sort(input);
+		MergeSort.sort(in, 0, in.length - 1);
 		
-		assertEquals("[1, 2, 3, 4, 5, 8, 9]", result.toString());
+		assertEquals("[1, 2, 3, 4, 5, 8, 9]", Arrays.toString(in));
 	}
 	
 	@Test
 	public void testMergeSort_two_items() {
-		List<Integer> input = Arrays.asList(7, 3);
+		Integer[] in = {7, 3};
 		
-		List<Integer> result = MergeSort.sort(input);
+		MergeSort.sort(in, 0, in.length - 1);
 		
-		assertEquals("[3, 7]", result.toString());
+		assertEquals("[3, 7]", Arrays.toString(in));
 	}
 	
 	@Test
 	public void testMergeSort_one_item() {
-		List<Integer> input = Arrays.asList(5);
+		Integer[] in = {5};
 		
-		List<Integer> result = MergeSort.sort(input);
+		MergeSort.sort(in, 0, in.length - 1);
 		
-		assertEquals("[5]", result.toString());
+		assertEquals("[5]", Arrays.toString(in));
+	}
+	
+	@Test
+	public void testMergeSort_duplicate_items() {
+		Integer[] in = {4, 2, 2, 3, 1, 3, 8};
+		
+		MergeSort.sort(in, 0, in.length - 1);
+		
+		assertEquals("[1, 2, 2, 3, 3, 4, 8]", Arrays.toString(in));
 	}
 	
 	@Test
 	public void testMergeSort_empty() {
-		List<Integer> input = new ArrayList<>();
+		Integer[] in = {};
 		
-		List<Integer> result = MergeSort.sort(input);
+		MergeSort.sort(in, 0, 0);
 		
-		assertEquals("[]", result.toString());
+		assertEquals("[]", Arrays.toString(in));
+	}
+	
+	@Test
+	public void testMergeSort_null_items() {
+		Integer[] in = {4, 2, null, 3, 1, null, 8};
+		
+		MergeSort.sort(in, 0, in.length - 1);
+		
+		assertEquals("[null, null, 1, 2, 3, 4, 8]", Arrays.toString(in));
 	}
 
 }
